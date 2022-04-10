@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        int ans = 0;
+        
+        for(int i=0; i<s.size(); i++) {
+            if(s[i] == 'V') ans += (i > 0 && s[i-1] == 'I') ? 3 : 5;
+            else if(s[i] == 'X') ans += (i > 0 && s[i-1] == 'I') ? 8 : 10;
+            
+            else if(s[i] == 'L') ans += (i > 0 && s[i-1] == 'X') ? 30 : 50;
+            else if(s[i] == 'C') ans += (i > 0 && s[i-1] == 'X') ? 80 : 100;
+            
+            else if(s[i] == 'D') ans += (i > 0 && s[i-1] == 'C') ? 300 : 500;
+            else if(s[i] == 'M') ans += (i > 0 && s[i-1] == 'C') ? 800 : 1000;
+            
+            else ans += 1;
+        }
+        
+        return ans;
+    }
+};
