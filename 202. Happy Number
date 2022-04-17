@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int getSquaredSum(int n) {
+        int s = 0;
+        while(n > 0) {
+            int rem = n % 10;
+            s += (rem * rem);
+            n /= 10;
+        }
+        
+        return s;
+    }
+    
+    bool isHappy(int n) {
+        set<int> s;
+        bool ok = false;
+        
+        while(1) {
+            int sqSum = getSquaredSum(n);
+            n = sqSum;
+            
+            if(sqSum == 1) {
+                ok = true;
+                break;
+            }
+            else if (s.find(sqSum) != s.end()) break;
+            
+            s.insert(sqSum);
+        }
+        
+        return ok;
+    }
+};
