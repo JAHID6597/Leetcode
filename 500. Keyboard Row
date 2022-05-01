@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<int> getRow(string s){
+        vector<int> row(26, 0);
+        
+        for(int i=0; i<s.size(); i++)
+            row[tolower(s[i]) - 'a'] = 1;
+        
+        return row;
+    }
+    
+    string r1s = "qwertyuiop", r2s = "asdfghjkl", r3s = "zxcvbnm";
+    
+    vector<int> row1 = getRow(r1s);
+    vector<int> row2 = getRow(r2s);
+    vector<int> row3 = getRow(r3s);
+    
+    bool checkInRow(vector<int> row, string s) {
+        bool ok = true;
+        
+        for(int i=0; i<s.size(); i++){
+            if(!row[tolower(s[i]) - 'a']) {
+                ok = false;
+                break;
+            }
+        }
+        
+        return ok;
+    }
+    
+    bool inRow(string s) {
+        return checkInRow(row1, s) || checkInRow(row2, s) || checkInRow(row3, s);
+    }
+    
+    vector<string> findWords(vector<string>& words) {
+        vector<string> w;
+        
+        for(int i=0;i<words.size();i++){
+            if(inRow(words[i]))
+                w.push_back(words[i]);
+        }
+        
+        return w;
+    }
+};
