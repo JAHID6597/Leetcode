@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string getString(string s){
+        string ns = "";
+        stack<char> stk;
+        
+        for(int i=0;i<s.size();i++){
+            if(s[i] != '#')
+                stk.push(s[i]);
+            else {
+                if(!stk.empty())
+                    stk.pop();
+            }
+        }
+        
+        while(!stk.empty()){
+            ns += stk.top();
+            stk.pop();
+        }
+        
+        return ns;
+    }
+    
+    bool backspaceCompare(string s, string t) {
+        return getString(s) == getString(t);
+    }
+};
