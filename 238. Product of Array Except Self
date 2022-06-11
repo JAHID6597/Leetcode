@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int p = 1, z = 0;
+        
+        for(int i=0;i<nums.size();i++) {
+            if(nums[i] != 0) p *= nums[i];
+            else z++;
+        }
+        
+        vector<int> ap;
+        
+        for(int i=0;i<nums.size();i++) {
+            if(z > 1 || (z && nums[i] != 0)) ap.push_back(0);
+            else if(z && nums[i] == 0) ap.push_back(p);
+            else ap.push_back(p/nums[i]);
+        }
+        
+        return ap;
+    }
+};
