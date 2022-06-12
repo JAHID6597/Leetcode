@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4) {
+        map<int, int> mp;
+        int mod = 1000000007;
+        
+        int len = nums1.size();
+        
+        for(int i=0;i<len;i++) {
+            for(int j=0;j<len;j++) {
+                mp[(nums1[i]%mod + nums2[j]%mod)%mod]++;
+            }
+        }
+        
+        int c=0;
+        
+        for(int i=0;i<len;i++) {
+            for(int j=0;j<len;j++) {
+                c+=mp[-1 * ((nums3[i]%mod + nums4[j]%mod)%mod)];
+            }
+        }
+        
+        return c;
+    }
+};
