@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string decodeMessage(string key, string message) {
+        map<char, int> secret;
+        
+        for(int i=0, idx=0; i < key.size(); i++) {            
+            if(key[i] != ' ' && secret.find(key[i]) == secret.end())
+                secret.insert({ key[i], idx++ });
+        }
+        
+        string output = "";
+        
+        for(int i=0; i<message.size(); i++)
+            output += message[i] == ' ' ? ' ' : ('a' + secret[message[i]]);
+        
+        return output;
+    }
+};
