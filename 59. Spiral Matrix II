@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> spiralMatrix(n, vector<int>(n, 0));
+        int top = 0, bottom = n - 1, left = 0, right = n - 1, val=1;
+        
+        while(top <= bottom && left <= right) {
+            // top -> left to right
+            if(top <= bottom && left <= right) {
+                for(int i = left; i <= right; i++)
+                    spiralMatrix[top][i] = val++;
+                top++;
+            }
+            
+            // right -> top to bottom
+            if(top <= bottom && left <= right) {
+                for(int i = top; i <= bottom; i++)
+                    spiralMatrix[i][right] = val++;
+                right--;
+            }
+            
+            // bottom -> right to left
+            if(top <= bottom && left <= right) {
+                for(int i = right; i >= left; i--)
+                    spiralMatrix[bottom][i] = val++;
+                bottom--;
+            }
+            
+            // left -> bottom to top
+            if(top <= bottom && left <= right) {
+                for(int i = bottom; i >= top; i--)
+                    spiralMatrix[i][left] = val++;
+                left++;
+            }
+        }
+        
+        return spiralMatrix;
+    }
+};
