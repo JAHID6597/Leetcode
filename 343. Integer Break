@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int integerBreak(int n) {
+        int d = n / 3;
+        
+        if(n == 2 || n == 3)
+            return n-1;
+        
+        if(n % 3 == 0)
+            return pow(3, d);
+        
+        long long a1 = 3 * d + 2 == n ? pow(3, d) * 2 : 1;
+        long long a2 = 3 * (d - 1) + 4 == n ? pow(3, d - 1) * 4 : 1;
+        
+        return max(a1, a2);
+    }
+};
