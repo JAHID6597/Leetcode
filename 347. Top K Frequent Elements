@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<pair<int, int> > vp;
+        vector<int> fc;
+        map<int, int> mp;
+        
+        for(int i=0; i<nums.size(); i++) {
+            mp[nums[i]]++;
+        }
+        
+        for(auto it: mp) {
+            vp.push_back({ it.second, it.first });
+        }
+        
+        sort(vp.begin(), vp.end());
+        
+        for(int i=vp.size()-1; i>=0 && k > 0; i--,k--) {
+            fc.push_back(vp[i].second);
+        }
+        
+        return fc;
+    }
+};
