@@ -1,0 +1,65 @@
+class Solution {
+public:
+    int firstPosition(vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+        int idx = -1;
+        
+        while(left <= right) {
+            int mid = right - (right - left) / 2;
+            
+            if(nums[mid] == target) {
+                int prev = mid - 1;
+                if(mid == 0 || prev >= 0 && nums[prev] != target) {
+                    idx = mid;
+                    break;
+                }
+                else right = prev;
+                
+                continue;
+            }
+            
+            if(nums[mid] < target)
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+        
+        return idx;
+    }
+    
+    int lastPosition(vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+        int idx = -1;
+        
+        while(left <= right) {
+            int mid = right - (right - left) / 2;
+            
+            if(nums[mid] == target) {
+                int next = mid + 1;
+                if(mid == nums.size() - 1 || next < nums.size() && nums[next] != target) {
+                    idx = mid;
+                    break;
+                }
+                else left = next;
+                
+                continue;
+            }
+            
+            if(nums[mid] < target)
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+        
+        return idx;
+    }
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> ans;
+        
+        ans.push_back(firstPosition(nums, target));
+        ans.push_back(lastPosition(nums, target));
+        
+        return ans;
+    }
+};
