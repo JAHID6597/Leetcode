@@ -1,0 +1,15 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        map<int, int> vis;
+
+        for(int i = 0; i < numbers.size(); i++) {
+            if(vis[target - numbers[i]])
+                return { vis[target - numbers[i]], i + 1 };
+            
+            vis[numbers[i]] = i + 1;
+        }
+
+        return {};
+    }
+};
