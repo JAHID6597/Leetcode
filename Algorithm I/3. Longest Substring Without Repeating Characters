@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        map<char, int> vis;
+        int prev = 0, mxLen = 0;
+
+        for(int i=0; i<s.size(); i++) {
+            if(vis.find(s[i]) != vis.end()) {
+                prev = max(vis[s[i]], prev);
+            }
+            
+            mxLen = max(mxLen, i - prev + 1);
+            vis[s[i]] = i + 1;
+        }
+
+        return mxLen;
+    }
+};
