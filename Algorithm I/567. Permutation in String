@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool isPermuteExist(map<char, int> m1, map<char, int> m2, int len) {
+        int c = 0;
+
+        for (auto it = m1.begin(); it != m1.end(); it++) {
+            if (it->second == m2[it->first]) 
+                c += it->second;
+        }
+
+        return c == len;
+    }
+
+    bool checkInclusion(string s1, string s2) { 
+        map<char, int> vs1, vs2;
+        int c = 0;
+
+        for (int i = 0; i < s1.size(); i++) {
+            vs1[s1[i]]++;
+        }
+
+        for (int i = 0; i < s2.size(); i++) {
+            if (c != s1.size()) {
+                vs2[s2[i]]++;
+                c++;
+            } else {
+                if (isPermuteExist(vs1, vs2, s1.size()))
+                    return true;
+
+                vs2[s2[i - s1.size()]]--;
+                vs2[s2[i]]++;
+            }
+        }
+
+        if (isPermuteExist(vs1, vs2, s1.size()))
+            return true;
+
+        return false;
+    }
+};
