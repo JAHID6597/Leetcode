@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        map<string, int> cache;
+        for(auto word: wordDict) {
+            cache[word] = true;
+        }
+
+        vector<bool> vis(s.size(), false);
+        vis[0] = true;
+        for(int i = 0; i < s.size(); i++) {
+            if(!vis[i]) {
+                continue;
+            }
+
+            for(int j = i + 1; j <= s.size(); j++) {
+                if(cache[s.substr(i, j - i)]) {
+                    vis[j] = true;
+                }
+            }
+        }
+
+        return vis[s.size()];
+    }
+};
