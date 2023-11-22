@@ -1,0 +1,27 @@
+class Solution {
+public:
+    enum StackOperations { PUSH, POP };
+
+    map<StackOperations, string> stackOperationToString = {
+        { PUSH, "Push" },
+        { POP, "Pop" }
+    };
+
+    vector<string> buildArray(vector<int>& target, int n) {
+        vector<string> ans;
+        int i = 1;
+
+        for(auto num: target) {
+            while(i < num) {
+                ans.push_back(stackOperationToString[PUSH]);
+                ans.push_back(stackOperationToString[POP]);
+                i++;
+            }
+
+            ans.push_back(stackOperationToString[PUSH]);
+            i++;
+        }
+
+        return ans;
+    }
+};
