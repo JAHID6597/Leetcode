@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        if(s.size() < p.size()) return {};
+        
+        vector<int> sHash(26, 0), pHash(26, 0), ans;
+
+        for(auto c: p) {
+            pHash[c - 'a']++;
+        }
+
+        for(int i = 0; i < p.size(); i++) {
+            sHash[s[i] - 'a']++;
+        }
+
+        if(sHash == pHash) ans.push_back(0);
+
+        for(int i = p.size(), l = 0; i < s.size(); i++) {
+            sHash[s[l++] - 'a']--;
+            sHash[s[i] - 'a']++;
+
+            if(sHash == pHash) ans.push_back(l);
+        }
+
+        return ans;
+    }
+};
