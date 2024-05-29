@@ -1,0 +1,30 @@
+;
+class Solution {
+public:
+    map<int, int> visit(vector<int>& nums, map<int, int>& vis, int c) {
+        for (auto it : nums) {
+            if ((c == 1 && vis.find(it) == vis.end()) ||
+                (c == 2 && vis[it] == 1)) {
+                vis[it]++;
+            }
+        }
+
+        return vis;
+    }
+
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        map<int, int> vis;
+
+        vis = visit(nums1, vis, 1);
+        vis = visit(nums2, vis, 2);
+
+        vector<int> result;
+        for (auto it : vis) {
+            if (it.second == 2) {
+                result.push_back(it.first);
+            }
+        }
+
+        return result;
+    }
+};
