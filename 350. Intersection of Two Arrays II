@@ -1,0 +1,30 @@
+class Solution {
+public:
+    map<int, int> visit(vector<int>& nums) {
+        map<int, int> vis;
+
+        for (auto it : nums) {
+            vis[it]++;
+        }
+
+        return vis;
+    }
+
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        map<int, int> vis1 = visit(nums1);
+        map<int, int> vis2 = visit(nums2);
+
+        vector<int> result;
+        for (auto it1 : vis1) {
+            if (vis2.find(it1.first) != vis2.end()) {
+                int c = min(it1.second, vis2[it1.first]);
+
+                for (int i = 0; i < c; i++) {
+                    result.push_back(it1.first);
+                }
+            }
+        }
+
+        return result;
+    }
+};
