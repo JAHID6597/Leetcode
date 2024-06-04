@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> makeSubsets(vector<vector<int>>& list, vector<int>& vis,
+                                    vector<int>& nums, int s = 0) {
+        list.push_back(vis);
+        for (int i = s; i < nums.size(); i++) {
+            if (i > s && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            vis.push_back(nums[i]);
+            makeSubsets(list, vis, nums, i+1);
+            vis.pop_back();
+        }
+
+        return list;
+    }
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> list;
+        vector<int> vis;
+
+        sort(nums.begin(), nums.end());
+
+        return makeSubsets(list, vis, nums);
+    }
+};
