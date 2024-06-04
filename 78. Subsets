@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> makeSubsets(vector<vector<int>>& list, vector<int>& vis,
+                                    vector<int>& nums, int s = 0) {
+        list.push_back(vis);
+        while (s < nums.size()) {
+            vis.push_back(nums[s++]);
+            makeSubsets(list, vis, nums, s);
+            vis.pop_back();
+        }
+
+        return list;
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> list;
+        vector<int> vis;
+
+        return makeSubsets(list, vis, nums);
+    }
+};
