@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+        map<int, bool> mp2;
+        for (auto it : arr2) {
+            mp2[it] = true;
+        }
+
+        map<int, int> mp1;
+        vector<int> xtra;
+        for (auto it : arr1) {
+            mp1[it]++;
+
+            if (!mp2[it]) {
+                xtra.push_back(it);
+            }
+        }
+
+        sort(xtra.begin(), xtra.end());
+
+        vector<int> ans;
+        for (auto it : arr2) {
+            for (int i = 0; i < mp1[it]; i++) {
+                ans.push_back(it);
+            }
+        }
+
+        for (auto it : xtra) {
+            ans.push_back(it);
+        }
+
+        return ans;
+    }
+};
